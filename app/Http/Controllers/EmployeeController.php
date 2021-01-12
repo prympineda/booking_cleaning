@@ -33,10 +33,21 @@ class EmployeeController extends Controller
 
     public function savePrice(Request $request)
     {
-        Rate::where('employee_id', Auth::user()->id)
-            ->update([
+
+        $rate = Rate::where('employee_id', Auth::user()->id)->first();
+
+        if($rate == null){
+            $rate = new Rate;
+            Rate::create([
+                'employee_id' => Auth::user()->id,
                 'price' => $request->amount
             ]);
+        } else {
+            $rate->update([
+                'price' => $request->amount
+            ]);
+        }
+            
 
         return redirect()->back()->with('success', "Successfully Updated the Price");
     }
