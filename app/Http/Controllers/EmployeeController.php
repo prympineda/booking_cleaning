@@ -38,7 +38,7 @@ class EmployeeController extends Controller
                 'price' => $request->amount
             ]);
 
-        return redirect()->back()->with('success', "Succeddfully Updated the Price");
+        return redirect()->back()->with('success', "Successfully Updated the Price");
     }
 
     /**
