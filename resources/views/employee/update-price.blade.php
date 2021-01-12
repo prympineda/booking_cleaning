@@ -20,7 +20,7 @@
             @endif
             <div class="form-group">
                 <label for="amount">Amount</label>
-                <input type="number" class="form-control" name="amount" id="amount" value="{{ $price->price }}">
+                <input type="number" class="form-control" name="amount" id="amount" value="{{ $price->price ?? 0 }}">
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </div>
