@@ -224,6 +224,14 @@ return [
     */
 
     'menu' => [
+        //Admin Menus
+        ['header' => 'Bookings', 'can' => 'admin-only'],
+        [
+            'text' => 'Bookings',
+            'url'  => '/admin',
+            'icon' => 'far fa-calendar-alt',
+            'can' => 'admin-only'
+        ],
         //Employee Menus
         ['header' => 'Bookings', 'can' => 'employee-only'],
         [
@@ -238,13 +246,13 @@ return [
             'icon' => 'fas fa-sort-amount-up-alt',
             'can' => 'employee-only'
         ],
-        ['header' => 'account_settings', 'can' => 'employee-only'],
-        [
-            'text' => 'profile',
-            'url'  => 'employee/profile',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'employee-only'
-        ],
+        // ['header' => 'account_settings', 'can' => 'employee-only'],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'employee/profile',
+        //     'icon' => 'fas fa-fw fa-user',
+        //     'can' => 'employee-only'
+        // ],
         //Customer Menus
         ['header' => 'Bookings', 'can' => 'customer-only'],
         [

@@ -31,7 +31,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Employee']], function () { 
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function () { 
 
    Route::get('/', 'AdminController@index')->name('admin_dashboard');
 
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'Employee']], fun
 
     Route::get('/', 'EmployeeController@index')->name('employee_dashboard');
 
-    Route::get('profile', 'EmployeeController@show');
+    // Route::get('profile', 'EmployeeController@show');
 
     Route::get('update-price', 'EmployeeController@updatePrice')->name('update-price');
 
@@ -74,4 +74,4 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'Customer']], fun
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

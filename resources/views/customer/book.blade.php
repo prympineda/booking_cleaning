@@ -36,6 +36,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">Select Available Resources:</label>
+                    <p class="text-danger no-resources d-none">Sorry No Available Resources for your preffered date and time</p>
                     <select name="select_resources" id="select_resources" class="form-control">
                     </select>
                 </div>
@@ -140,6 +141,10 @@
 
         var start_date, end_date, total_price;
 
+        function isEmpty(obj) {
+            return Object.keys(obj).length === 0;
+        }
+
         $('.step_one_next').click(function (e){
             e.preventDefault();
             start_date = $('#start_date').val();
@@ -159,10 +164,18 @@
                             $('.current_step').html("2")
                             $('.first_step').addClass('d-none')
                             $('.second_step').removeClass('d-none')
-                            $.each(data.data, function (i, val){
-                                $('#select_resources').append(`<option value="${val.id}" data-price="${val.rate[0].price}"> ${val.name} - P${val.rate[0].price}/hour </option>
-                                `);
-                            });
+                            if(isEmpty(data.data)){
+                                $('.no-resources').removeClass('d-none')
+                                $('.step_two_next').prop('disabled', true)
+                            } else {
+                                $.each(data.data, function (i, val){
+                                    $('#select_resources').append(`<option value="${val.id}" data-price="${val.rate}"> ${val.name} - P${val.rate}/hour </option>
+                                    `);
+                                });
+                                $('.no-resources').addClass('d-none')
+                                $('.step_two_next').prop('disabled', false)   
+                            }
+                           
                         } else {
                             console.log(data)
                         }
@@ -172,7 +185,7 @@
                     }
                 })
             } else {
-                console.log("Please select date first")
+                toastr.error("Please select date first")
             }
         })
 

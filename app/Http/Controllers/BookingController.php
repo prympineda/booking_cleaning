@@ -25,8 +25,15 @@ class BookingController extends Controller
                          ->where('role_id', 2)
                          ->get();
 
+        $rate = [];
         foreach($resources as $key => $r){
-            $resources[$key]['rate'] = Rate::select('price')->where('employee_id', $r->id)->get();
+            $rate = Rate::where('employee_id', $r->id)->first();
+            if($rate != null){
+                $resources[$key]['rate'] = $rate->price;
+            } else {
+                $resources->forget($key);
+            }
+            // $resources[$key]['rate'] = Rate::select('price')->where('employee_id', $r->id)->get();
         }
         
         $books = Booking::all();
