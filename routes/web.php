@@ -35,10 +35,24 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function 
 
    Route::get('/', 'AdminController@index')->name('admin_dashboard');
 
+   Route::get('/subscription', 'PaymentController@index')->name('admin_subscriptions');
+
+   Route::post('save-payment', 'PaymentController@store')->name('save-payment');
+
+   Route::get('payments', 'PaymentController@getPayments')->name('get-payments');
+
+   Route::get('view-payment/{id}', 'PaymentController@show')->name('view-payment');
+
+   Route::post('update-payment/{id}', 'PaymentController@update')->name('update-payment');
+
+   Route::get('list-employee', 'AdminController@getEmployees')->name('list-employee');
+
+   Route::get('list-customer', 'AdminController@getCustomers')->name('list-customer');
+
 });
 
 
-Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'Employee']], function () { 
+Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'Subsciption', 'Employee']], function () { 
 
     Route::get('/', 'EmployeeController@index')->name('employee_dashboard');
 
@@ -51,7 +65,7 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'Employee']], fun
 });
 
 
-Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'Customer']], function () { 
+Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'Subsciption', 'Customer']], function () { 
 
     Route::get('/', 'CustomerController@index')->name('customer_dashboard');
 
@@ -71,6 +85,9 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'Customer']], fun
     
 });
 
+Route::get('no-payment', 'PaymentController@noPayment')->name('no-payment')->middleware('auth', 'is_verified_payment');
+
+Route::post('save-requested-transaction', 'PaymentController@saveRequestedTransaction')->name('save-requested-transaction')->middleware('auth', 'is_verified_payment');
 
 Auth::routes();
 

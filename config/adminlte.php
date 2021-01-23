@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => env('APP_NAME', 'Booking Cleaning'),
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -231,6 +231,61 @@ return [
             'url'  => '/admin',
             'icon' => 'far fa-calendar-alt',
             'can' => 'admin-only'
+        ],
+        ['header' => 'Subscriptions', 'can' => 'admin-only'],
+        [
+            'text' => 'Subscriptions',
+            'url'  => '/admin/subscription',
+            'icon' => 'fas fa-user-check',
+            'can' => 'admin-only'
+        ],
+        ['header' => 'Payments', 'can' => 'admin-only'],
+        [
+            'text' => 'Payments',
+            'url'  => '/admin/payments',
+            'icon' => 'fas fa-money-check',
+            'can' => 'admin-only'
+        ],
+        ['header' => 'Users Management', 'can' => 'admin-only'],
+        [
+            'text' => 'Users Management',
+            'icon' => 'fas fa-user-cog',
+            'can' => 'admin-only',
+            'submenu' => [
+                [
+                    'text' => 'Employees',
+                    'icon' => 'fas fa-user-clock',
+                    'submenu' => [
+                        [
+                            'text' => 'List Employees',
+                            'url'  => 'admin/list-employee',
+                            'icon' => 'fas fa-user-clock',
+                        ],
+                        // [
+                        //     'text' => 'Create Employee',
+                        //     'url'  => 'admin/list-customers',
+                        //     'icon' => 'fas fa-user-plus',
+                        // ]
+                    ]
+                ],
+                [
+                    'text' => 'Customers',
+                    'url'  => 'admin/list-customer',
+                    'icon' => 'fas fa-user-alt',
+                    'submenu' => [
+                        [
+                            'text' => 'List Customers',
+                            'url'  => 'admin/list-customer',
+                            'icon' => 'fas fa-user-alt',
+                        ],
+                        // [
+                        //     'text' => 'Create Customer',
+                        //     'url'  => 'admin/list-customers',
+                        //     'icon' => 'fas fa-user-plus',
+                        // ]
+                    ]
+                ]
+            ]
         ],
         //Employee Menus
         ['header' => 'Bookings', 'can' => 'employee-only'],

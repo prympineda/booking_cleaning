@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Booking;
 
+use App\User;
+
 class AdminController extends Controller
 {
     /**
@@ -17,6 +19,16 @@ class AdminController extends Controller
     {
        $bookings = Booking::all();
        return view('admin.index', compact('bookings'));
+    }
+
+    public function getEmployees(){
+        $employees = User::where('role_id', 2)->get();
+       return view('admin.employee.index', compact('employees'));
+    }
+
+    public function getCustomers(){
+        $customers = User::where('role_id', 3)->get();
+       return view('admin.customer.index', compact('customers'));
     }
 
     /**

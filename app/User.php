@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Rate;
+use App\Payment;
 
 class User extends Authenticatable
 {
@@ -17,9 +18,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'role_id'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -41,5 +40,9 @@ class User extends Authenticatable
 
     public function rate(){
         return $this->belongsTo(Rate::class, 'id', 'employee_id');
+    }
+
+    public function latest_transaction(){
+        return $this->belongsTo(Payment::class, 'id', 'user_id')->latest();
     }
 }
