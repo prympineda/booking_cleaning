@@ -36,15 +36,15 @@
                     <div class="card-body p-1">
                         <div class="form-group">
                             <label for="amount">Transaction Number: </label>
-                            <input type="text" class="form-control" name="transaction_number" required>
+                            <input type="text" class="form-control" value="{{ old('transaction_number') }}" name="transaction_number" required>
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount: </label>
-                            <input type="number" class="form-control" name="amount" required>
+                            <input type="number" class="form-control" name="amount" value="{{ old('amount') }}" required>
                         </div>
                         <div class="form-group">
                             <label for="user_comment">Comment:  </label>
-                            <textarea name="user_comment" id="user_comment"  class="form-control" maxlength="30" cols="15" rows="5" required></textarea>
+                            <textarea name="user_comment" id="user_comment" class="form-control" maxlength="30" cols="15" rows="5" required>{{ old('user_comment') }}</textarea>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,13 @@
 
 @section('content')
 
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>	
+                <strong>{{ $message }}</strong>
+        </div>
+    @endif
+
     <table class="table table-striped">
 
         <thead>
@@ -28,7 +35,7 @@
                 <td> {{ $customer->mobile_number }} </td>
                 <td> {{ $customer->address . ', ' . $customer->city . ', ' .$customer->province }} </td>
                 <td> {{ $customer->address_landmark }} </td>
-                <td> <button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button> </td>
+                <td> <a href="{{route('edit-user', $customer->id)}}" class="btn btn-primary">Edit</a> <button type="button" class="btn btn-danger">Delete</button> </td>
             </tr>
             @endforeach
 

@@ -8,6 +8,13 @@
 
 @section('content')
 
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>	
+                <strong>{{ $message }}</strong>
+        </div>
+    @endif
+
     <table class="table table-striped">
 
         <thead>
@@ -26,7 +33,7 @@
                 <td> {{ $employee->subscription_expire }} </td>
                 <td> {{ $employee->mobile_number }} </td>
                 <td> {{ $employee->address . ', ' . $employee->city . ', ' .$employee->province }} </td>
-                <td> <button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button> </td>
+                <td> <a href="{{route('edit-user', $employee->id)}}" class="btn btn-primary">Edit</a> <button type="button" class="btn btn-danger">Delete</button> </td>
             </tr>
             @endforeach
 

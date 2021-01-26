@@ -261,11 +261,11 @@ return [
                             'url'  => 'admin/list-employee',
                             'icon' => 'fas fa-user-clock',
                         ],
-                        // [
-                        //     'text' => 'Create Employee',
-                        //     'url'  => 'admin/list-customers',
-                        //     'icon' => 'fas fa-user-plus',
-                        // ]
+                        [
+                            'text' => 'Create Employee',
+                            'url'  => 'admin/create-employee',
+                            'icon' => 'fas fa-user-plus',
+                        ]
                     ]
                 ],
                 [
@@ -278,11 +278,11 @@ return [
                             'url'  => 'admin/list-customer',
                             'icon' => 'fas fa-user-alt',
                         ],
-                        // [
-                        //     'text' => 'Create Customer',
-                        //     'url'  => 'admin/list-customers',
-                        //     'icon' => 'fas fa-user-plus',
-                        // ]
+                        [
+                            'text' => 'Create Customer',
+                            'url'  => 'admin/create-customer',
+                            'icon' => 'fas fa-user-plus',
+                        ]
                     ]
                 ]
             ]

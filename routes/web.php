@@ -23,11 +23,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             } else if (Auth::user()->role_id == 3){
                 return redirect()->route('customer_dashboard');
             }
-        
     });
-
-
-  
 
 });
 
@@ -48,6 +44,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function 
    Route::get('list-employee', 'AdminController@getEmployees')->name('list-employee');
 
    Route::get('list-customer', 'AdminController@getCustomers')->name('list-customer');
+
+   Route::get('create-customer', function (){
+       return view('admin.customer.create');
+   })->name('create-customer');
+
+   Route::get('create-employee', function (){
+       return view('admin.employee.create');
+   })->name('create-employee');
+
+   Route::post('store-user', 'AdminController@storeUser')->name('store-user');
+
+   Route::get('edit-user/{id}', 'AdminController@editUser')->name('edit-user');
+
+   Route::post('update-user/{id}', 'AdminController@updateUser')->name('update-user');
 
 });
 
