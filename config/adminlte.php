@@ -253,6 +253,23 @@ return [
             'can' => 'admin-only',
             'submenu' => [
                 [
+                    'text' => 'Admins',
+                    'url'  => 'admin/list-admins',
+                    'icon' => 'fas fa-user-lock',
+                    'submenu' => [
+                        [
+                            'text' => 'List Admins',
+                            'url'  => 'admin/list-admin',
+                            'icon' => 'fas fa-user-lock',
+                        ],
+                        [
+                            'text' => 'Create Admin',
+                            'url'  => 'admin/create-admin',
+                            'icon' => 'fas fa-user-plus',
+                        ]
+                    ]
+                ],
+                [
                     'text' => 'Employees',
                     'icon' => 'fas fa-user-clock',
                     'submenu' => [
@@ -301,13 +318,20 @@ return [
             'icon' => 'fas fa-sort-amount-up-alt',
             'can' => 'employee-only'
         ],
-        // ['header' => 'account_settings', 'can' => 'employee-only'],
-        // [
-        //     'text' => 'profile',
-        //     'url'  => 'employee/profile',
-        //     'icon' => 'fas fa-fw fa-user',
-        //     'can' => 'employee-only'
-        // ],
+        ['header' => 'Payments', 'can' => 'employee-only'],
+        [
+            'text' => 'Payments History',
+            'url'  => '/employee/payments',
+            'icon' => 'far fa-calendar-alt',
+            'can' => 'employee-only'
+        ],
+        ['header' => 'Account Settings', 'can' => 'employee-only'],
+        [
+            'text' => 'profile',
+            'url'  => 'employee/profile',
+            'icon' => 'fas fa-fw fa-user',
+            'can' => 'employee-only'
+        ],
         //Customer Menus
         ['header' => 'Bookings', 'can' => 'customer-only'],
         [
@@ -320,6 +344,20 @@ return [
             'text' => 'Book a Clean',
             'url'  => 'customer/book-a-clean',
             'icon' => 'fas fa-calendar-plus',
+            'can' => 'customer-only'
+        ],
+        ['header' => 'Payments', 'can' => 'customer-only'],
+        [
+            'text' => 'Payments History',
+            'url'  => '/customer/payments',
+            'icon' => 'far fa-calendar-alt',
+            'can' => 'customer-only'
+        ],
+        ['header' => 'Account Settings', 'can' => 'customer-only'],
+        [
+            'text' => 'profile',
+            'url'  => 'customer/profile',
+            'icon' => 'fas fa-fw fa-user',
             'can' => 'customer-only'
         ],
 

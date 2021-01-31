@@ -3,7 +3,6 @@
 @section('title', 'Customer Page')
 
 @section('content_header')
-    <h1 class="text-danger">Your subscription is expired.</h1>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop
 
@@ -12,12 +11,12 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-12">
-                    Please enter your new Gcash Paid Transaction
+                   Add Payment
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <form id="add-transaction-form" action="{{route('save-requested-transaction')}}" method="POST">
+            <form action="{{route('save-requested-payment')}}" method="POST">
                     @csrf
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success alert-block">
@@ -50,34 +49,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="sumbit" class="btn btn-primary btn-save-transac">Submit</button>
+                    <button type="sumbit" class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div>
     </div>
-    <h4 class="pt-3">Payment History</h4>
-    <table class="table table-striped">
-
-        <thead>
-            <th>Date Submitted</th>
-            <th>Transaction Number</th>
-            <th>My Comment</th>
-            <th>Admin Comment</th>
-            <th>Status </th>
-        </thead>
-        <tbody>
-            @foreach ($payments as $payment)
-            <tr>
-                <td> {{ $payment->created_at }} </td>
-                <td> {{ $payment->transaction_number }} </td>
-                <td> {{ $payment->user_comment }} </td>
-                <td> {{ $payment->admin_comment }} </td>
-                <td> {{ $payment->status }} </td>
-            </tr>
-            @endforeach
-        </tbody>
-        
-    </table>
 @stop
 
 @section('css')
@@ -86,16 +62,6 @@
 @section('js')
 
     <script>
-
-        $('.table').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": true,
-        });
 
     </script>
 

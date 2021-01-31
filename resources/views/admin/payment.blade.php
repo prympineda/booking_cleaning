@@ -23,14 +23,14 @@
             <th>Transaction Number </th>
             <th>Amount </th>
             <th>User Comment</th>
-            <th>Admin Comment</th>=
+            <th>Admin Comment</th>
             <th>Action</th>
         </thead>
         <tbody>
             @foreach ($payments as $payment)
             <tr>
-                <td> {{ $payment->user->name }} </td>
-                <td> {{ $payment->user->role_id == 2 ?  'Employee' : "Customer" }} </td>
+                <td> {{ $payment->user->name ?? 'Deleted User' }} </td>
+                <td> {{ isset($payment->user->role_id) ? ($payment->user->role_id == 2 ?  'Employee' : "Customer") : 'Deleted User*'}} </td>
                 <td> {{ $payment->status }} </td>
                 <td> {{ $payment->transaction_number }} </td>
                 <td> {{ $payment->amount }} </td>

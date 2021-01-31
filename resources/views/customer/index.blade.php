@@ -19,7 +19,7 @@
         <tbody>
             @foreach ($bookings as $b)
                 <tr>
-                    <td> {{ $b->employee->name }} </td>
+                    <td> {{ $b->employee->name ?? 'Deleted User*' }} </td>
                     <td> {{ date('d/m/Y H:m', strtotime($b->start_date)) }} </td>
                     <td> {{ date('d/m/Y H:m', strtotime($b->end_date)) }} </td>
                     <td> @if ($b->end_date > date('Y-m-d H:m')) Upcoming @else Done @endif </td>

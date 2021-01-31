@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function 
    Route::get('view-payment/{id}', 'PaymentController@show')->name('view-payment');
 
    Route::post('update-payment/{id}', 'PaymentController@update')->name('update-payment');
+   
+   Route::get('list-employee', 'AdminController@getEmployees')->name('list-employee');
 
    Route::get('list-employee', 'AdminController@getEmployees')->name('list-employee');
 
@@ -59,6 +61,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function 
 
    Route::post('update-user/{id}', 'AdminController@updateUser')->name('update-user');
 
+   Route::get('create-admin', function (){
+        return view('admin.create-admin');
+    })->name('create-admin');
+
+   Route::get('list-admin', 'AdminController@listAdmins')->name('list-admin');
+
+   Route::get('show-admin/{id}', 'AdminController@showAdmin')->name('show-admin');
+
+   Route::post('update-admin/{id}', 'AdminController@updateAdmin')->name('update-admin');
+
+   Route::post('store-admin', 'AdminController@storeAdmin')->name('store-admin');
+
+   Route::post('delete-user', 'AdminController@deleteUser')->name('delete-user');
+
 });
 
 
@@ -66,11 +82,15 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'Subsciption', 'E
 
     Route::get('/', 'EmployeeController@index')->name('employee_dashboard');
 
-    // Route::get('profile', 'EmployeeController@show');
+    Route::get('profile', 'EmployeeController@show')->name('employee-profile');
 
     Route::get('update-price', 'EmployeeController@updatePrice')->name('update-price');
 
     Route::post('save-price', 'EmployeeController@savePrice')->name('save-price');
+
+    Route::get('payments', 'EmployeeController@getPayments')->name('employee-payments');
+
+    Route::post('employee-update-profile/{id}', 'EmployeeController@updateProfile')->name('employee-update-profile');
     
 });
 
@@ -92,6 +112,12 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'Subsciption', 'C
     Route::get('save-booking', function (){
         abort(404);
     });
+
+    Route::get('profile', 'CustomerController@show')->name('customer-profile');
+
+    Route::get('payments', 'CustomerController@getPayments')->name('customer-payments');
+
+    Route::post('customer-update-profile/{id}', 'CustomerController@updateProfile')->name('customer-update-profile');
     
 });
 
@@ -99,6 +125,10 @@ Route::get('no-payment', 'PaymentController@noPayment')->name('no-payment')->mid
 
 Route::post('save-requested-transaction', 'PaymentController@saveRequestedTransaction')->name('save-requested-transaction')->middleware('auth', 'is_verified_payment');
 
-Auth::routes();
+Route::post('save-requested-payment', 'PaymentController@saveRequestedPayment')->name('save-requested-payment')->middleware('auth');
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('add-payment', function(){
+    return view('add-payment');
+})->name('add-payment');
+
+Auth::routes();

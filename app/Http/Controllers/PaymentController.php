@@ -118,7 +118,33 @@ class PaymentController extends Controller
             'user_comment' => $request->user_comment
         ]);
 
-        return redirect()->back()->with('success', "Successfully Saved the Transaction, the admin will review your payment and activate your account.");
+        return redirect()->back()->with('success', "Successfully Saved the Transaction, the admin will review your payment and update your activation period.");
+    }
+
+    public function saveRequestedPayment(Request $request){
+
+        $validator = Validator::make( $request->all(), [
+            'amount' => 'required|numeric',
+            'transaction_number' => 'required',
+            'user_comment' => 'required'
+        ]);
+
+        if ( $validator->fails() ) {
+            return redirect()->back()->withInput()->with('errors', $validator->errors());
+        }
+
+        $data = Payment::create([
+            'user_id' => Auth::user()->id,
+            'created_by' => Auth::user()->id,
+            'transaction_number' => $request->transaction_number,
+            'amount' => $request->amount,
+            'status' => "Pending",
+            'user_comment' => $request->user_comment
+        ]);
+
+        $type = Auth::user()->role_id == 2 ? 'employee' : 'customer';
+
+        return redirect()->route($type.'-payments')->with('success', "Successfully Saved the Transaction, the admin will review your payment and update your activation period.");
     }
 
     /**

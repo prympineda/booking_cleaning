@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="card col-md-8 col-12">
-        <form action="{{route('employee-update-profile', $employee->id)}}" method="POST">
+        <form action="{{route('customer-update-profile', $employee->id)}}" method="POST">
             @csrf
             <div class="card-body">
                 @if ($message = Session::get('success'))

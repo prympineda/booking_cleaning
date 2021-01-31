@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Customers List</h1>
+    <h1>Admin List</h1>
 @stop
 
 @section('content')
@@ -20,22 +20,14 @@
         <thead>
             <th>Name</th>
             <th>Email</th>
-            <th>Subscription Expire</th>
-            <th>Mobile Number</th>
-            <th>Address</th>
-            <th>Address Landmark</th>
             <th>Action</th>
         </thead>
         <tbody>
-            @foreach ($customers as $customer)
+            @foreach ($admins as $admin)
             <tr>
-                <td> {{ $customer->name }} </td>
-                <td> {{ $customer->email }} </td>
-                <td> {{ $customer->subscription_expire }} </td>
-                <td> {{ $customer->mobile_number }} </td>
-                <td> {{ $customer->address . ', ' . $customer->city . ', ' .$customer->province }} </td>
-                <td> {{ $customer->address_landmark }} </td>
-                <td> <a href="{{route('edit-user', $customer->id)}}" class="btn btn-primary">Edit</a> <button type="button" data-uid="{{ $customer->id }}" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#deleteModal">Delete</button> </td>
+                <td> {{ $admin->name }} </td>
+                <td> {{ $admin->email }} </td>
+                <td> <a href="{{route('show-admin', $admin->id)}}" class="btn btn-primary">Edit</a> @if (Auth::user()->id != $admin->id) <button type="button"  data-uid="{{ $admin->id }}"  data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-delete">Delete</button> @endif </td>
             </tr>
             @endforeach
 
@@ -43,8 +35,7 @@
         
     </table>
 
-
-<!-- Delete Modal -->
+        <!-- Delete Modal -->
  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="DeleteModalTitle" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -85,7 +76,7 @@
             "autoWidth": true,
             "responsive": true,
         });
-
+        
         $(document).on('click', '.btn-delete', function(){
             $('#uid').val($(this).data('uid'))
         })

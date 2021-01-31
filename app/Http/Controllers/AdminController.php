@@ -83,7 +83,7 @@ class AdminController extends Controller
                 'transaction_number' => $request->transaction_number,
                 'amount' => $request->amount,
                 'status' => "Paid",
-                'admin_comment' => $request->comment
+                'admin_comment' => $request->admin_comment
             ]);
         }
 
@@ -160,6 +160,98 @@ class AdminController extends Controller
 
         return redirect()->route('list-'.$user_type)->with('success', "Successfully Update " . ucfirst($user_type . " Details"));
 
+    }
+
+    public function listAdmins(){
+        $admins = User::where('role_id', 1)->get();
+        return view('admin.admins', compact('admins'));
+    }
+
+    public function showAdmin($id){
+        $admin = User::find($id);
+        return view('admin.edit-admin', compact('admin'));
+    }
+
+    public function updateAdmin(Request $request, $id){
+
+        $user = User::find($id);
+
+        $validator = Validator::make( $request->all(), [
+            'user_name' => 'required|string',
+            'email' => 'required|email'
+        ]);
+
+        if ( $validator->fails() ) {
+            return redirect()->back()->withInput()->with('errors', $validator->errors());
+        }
+
+        if ($user->email != $request->email){
+            $validator = Validator::make( $request->all(), [
+                'email' => 'unique:users'
+            ]);
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->withInput()->with('errors', $validator->errors());
+            }
+        }
+
+        if ($request->password != ""){
+
+            $validator = Validator::make( $request->all(), [
+                'password' => 'required|min:8|confirmed'
+            ]);
+    
+            if ( $validator->fails() ) {
+                return redirect()->back()->withInput()->with('errors', $validator->errors());
+            }
+
+        }
+
+        $user->update([
+            'name' => $request->user_name,
+            'email' => $request->email
+        ]);
+
+        if ($request->has('password')){ 
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+        }
+
+        return redirect()->route('list-admin')->with('success', "Successfully Update Admin Details");
+    }
+
+    public function storeAdmin(Request $request){
+        
+        $validator = Validator::make( $request->all(), [
+            'user_name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed'
+        ]);
+
+        if ( $validator->fails() ) {
+            return redirect()->back()->withInput()->with('errors', $validator->errors());
+        }
+
+        $user = User::create([
+            'name' => $request->user_name,
+            'role_id' => 1,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('list-admin')->with('success', "Successfully Created Admin");
+    }
+
+    public function deleteUser(Request $request){
+
+        $user = User::find($request->uid);
+
+        $user->delete();
+
+        $type = $user->role_id == 1 ? 'admin' : ($user->role_id == 2 ? 'employee' : 'customer' );
+
+        return redirect()->route('list-'.$type)->with('success', "Successfully Deleted ". ucfirst($type));
     }
 
 }

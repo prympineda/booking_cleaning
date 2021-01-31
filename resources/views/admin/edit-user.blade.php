@@ -69,7 +69,10 @@
                 <input type="hidden" name="role_id" value="2">
                 <div class="float-left">
                     <button type="submit" class="btn btn-success mr-2">Update</button>
-                    <a class="btn btn-danger" href="{{route('list-customer')}}">Cancel</a>
+                    @php
+                        $type = $user->role_id == 2 ? 'employee' : 'customer';
+                    @endphp
+                    <a class="btn btn-danger" href="{{route('list-'.$type)}}">Cancel</a>
                 </div>
             </div>
         </form>

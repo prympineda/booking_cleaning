@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 use App\Booking;
 use App\Rate;
-
+use App\Payment;
+use App\User;
 
 class EmployeeController extends Controller
 {
@@ -50,6 +52,13 @@ class EmployeeController extends Controller
             
 
         return redirect()->back()->with('success', "Successfully Updated the Price");
+    }
+
+    public function getPayments(){
+        $payments = Payment::where('user_id',Auth::user()->id)
+                            ->where('is_deleted', 0)
+                            ->get();
+        return view('employee.payments', compact('payments'));
     }
 
     /**
@@ -103,9 +112,60 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateProfile(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $validator = Validator::make( $request->all(), [
+            'user_name' => 'required|string',
+            'email' => 'required|email',
+            'user_mobile_number' => 'required|numeric',
+            'user_address' => 'required',
+            'user_address_landmark' => 'required'
+        ]);
+
+        if ( $validator->fails() ) {
+            return redirect()->back()->withInput()->with('errors', $validator->errors());
+        }
+
+        if ($user->email != $request->email){
+            $validator = Validator::make( $request->all(), [
+                'email' => 'unique:users'
+            ]);
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->withInput()->with('errors', $validator->errors());
+            }
+        }
+
+        if ($request->password != ""){
+
+            $validator = Validator::make( $request->all(), [
+                'password' => 'required|min:8|confirmed'
+            ]);
+    
+            if ( $validator->fails() ) {
+                return redirect()->back()->withInput()->with('errors', $validator->errors());
+            }
+
+        }
+
+        $user->update([
+            'name' => $request->user_name,
+            'email' => $request->email,
+            'mobile_number' => $request->user_mobile_number,
+            'address' => $request->user_address,
+            'address_landmark' => $request->user_address_landmark
+        ]);
+
+        if ($request->has('password')){ 
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+        }
+
+        return redirect()->back()->with('success', "Successfully Update Profile");
+
     }
 
     /**

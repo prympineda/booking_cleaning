@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <div class="card col-md-6">
+    <div class="card col-md-12">
         <form action="{{route('store-user')}}" method="POST">
             @csrf
             <div class="card-body">
@@ -27,7 +27,7 @@
                 </div>
             @endif
                 <div class="row">
-                    <div class="col-md-12 col-12">
+                    <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label for="user_name">Name</label>
                             <input type="name" class="form-control" id="user_name" name="user_name" placeholder="Enter Name" maxlength="50" required value="{{ old('user_name') }}">
@@ -65,11 +65,35 @@
                             <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Confirm Password">
                         </div>
                     </div>
+                    <div class="col-md-6 col-12">
+                        <div class="form-group pt-4">
+                            <input type="checkbox" id="add_subscription" name="add_subscription" {{ old('add_subscription') != null ? 'checked' : ''}} class="mr-2">
+                            <label for="add_subscription">Add Subscription</label>
+                        </div>
+                        <div class="subscription_form d-none">
+                            <div class="form-group">
+                                <label for="subscription_expire">Subscription Expire</label>
+                                <input type="datetime-local" class="form-control subscription_field" id="subscription_expire" name="subscription_expire" value="{{ old('subscription_expire') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Transaction Number</label>
+                                <input type="text" class="form-control subscription_field" name="transaction_number" maxlength="50" value="{{ old('transaction_number') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <input type="number" class="form-control subscription_field" name="amount" value="{{ old('amount') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="admin_comment">Comment </label>
+                                <textarea name="admin_comment" id="admin_comment"  class="form-control subscription_field" maxlength="30" cols="15" rows="5" >{{ old('admin_comment') }}</textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <input type="hidden" name="role_id" value="2">
                 <div class="float-left">
                     <button type="submit" class="btn btn-primary mr-2">Save</button>
-                    <a class="btn btn-danger" href="{{route('list-customer')}}">Cancel</a>
+                    <a class="btn btn-danger" href="{{route('list-employee')}}">Cancel</a>
                 </div>
             </div>
         </form>
@@ -82,5 +106,22 @@
 
 @section('js')
     <script>
+          $(document).ready(function (){
+            add_subscription()
+        })
+
+        $('#add_subscription').click(function (){
+            add_subscription()
+        })
+
+        function add_subscription(){
+            if($('#add_subscription').is(':checked')){
+                $('.subscription_form').removeClass('d-none');
+                $('.subscription_field').prop('required', true)
+            } else {
+                $('.subscription_form').addClass('d-none');
+                $('.subscription_field').prop('required', false)
+            }
+        }
     </script>
 @stop
