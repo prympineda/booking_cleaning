@@ -32,7 +32,7 @@
                 <td> {{ $user->mobile_number }} </td>
                 <td> {{ !empty($user->latest_transaction) ? $user->latest_transaction->user_comment : '' }} </td>
                 <td data-uid="{{ $user->id + 3 }}"> {{ !empty($user->latest_transaction) ? $user->latest_transaction->admin_comment : '' }} </td>
-                <td> <button type="button" class="btn btn-primary"> View </button> <button type="button" class="btn btn-warning btn-add" data-user_name="{{ $user->name }}" data-uid="{{ $user->id }}" data-toggle="modal" data-target="#addSubscriptionModal"> + </button>    </td>
+                <td>  <button type="button" class="btn btn-warning btn-add" data-user_name="{{ $user->name }}" data-uid="{{ $user->id }}" data-toggle="modal" data-target="#addSubscriptionModal"> + </button>    </td>
             </tr>
             @endforeach
         </tbody>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="amount">Amount</label>
-                                <input type="number" class="form-control" name="amount" required>
+                                <input type="number" class="form-control" name="amount" value="250" readonly required>
                             </div>
                             <div class="form-group">
                                 <label for="amount">Subscription Expire</label>

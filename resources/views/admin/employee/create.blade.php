@@ -81,7 +81,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="amount">Amount</label>
-                                <input type="number" class="form-control subscription_field" name="amount" value="{{ old('amount') }}">
+                                <input type="number" class="form-control subscription_field" name="amount" value="250" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="admin_comment">Comment </label>

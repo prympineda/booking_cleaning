@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount: </label>
-                            <input type="number" class="form-control" name="amount" value="{{ old('amount') }}" required>
+                            <input type="number" class="form-control" name="amount" value="250" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="user_comment">Comment:  </label>

@@ -24,6 +24,7 @@
             <th>Amount </th>
             <th>User Comment</th>
             <th>Admin Comment</th>
+            <th>Date</th>
             <th>Action</th>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                 <td> {{ $payment->amount }} </td>
                 <td> {{ $payment->user_comment }} </td>
                 <td> {{ $payment->admin_comment }} </td>
+                <td> {{ $payment->created_at }} </td>
                 <td> <a type="button" class="btn btn-primary" href="{{route('view-payment', $payment->id)}}"> View </a> <button type="button" class="btn btn-danger btn-add" data-toggle="modal" data-pid="{{ $payment->id }}" data-target="#addSubscriptionModal"> Delete </button>    </td>
             </tr>
             @endforeach
@@ -63,7 +65,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="amount">Amount</label>
-                                <input type="number" class="form-control" name="amount" required>
+                                <input type="number" class="form-control" name="amount" value="250" readonly required>
                             </div>
                             <div class="form-group">
                                 <label for="amount">Subscription Expire</label>

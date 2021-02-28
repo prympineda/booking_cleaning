@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount: </label>
-                            <input type="number" class="form-control" name="amount" value="{{$payment->amount}}" required>
+                            <input type="number" class="form-control" name="amount" value="{{$payment->amount}}" readonly required>
                         </div>
                         <div class="form-group">
                             <label for="user_comment">User Comment:  </label>

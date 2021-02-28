@@ -35,6 +35,7 @@
             <th>Amount </th>
             <th>My Comment</th>
             <th>Admin Comment</th>
+            <th>Date</th>
         </thead>
         <tbody>
             @foreach ($payments as $payment)
@@ -44,6 +45,7 @@
                 <td> {{ $payment->amount }} </td>
                 <td> {{ $payment->user_comment}} </td>
                 <td> {{ $payment->admin_comment}} </td>
+                <td> {{ $payment->created_at}} </td>
             </tr>
             @endforeach
 
