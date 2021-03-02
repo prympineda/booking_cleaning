@@ -12,6 +12,22 @@
     <form action=" {{ route('save-price') }} " method="POST">
         @csrf
         <div class="card-body">
+            <div>
+                <h5 class="p-0 m-0">Service Inclusions:</h5>
+                <ul>
+                    <li>Basic Cleaning</li>
+                    <li>Mopping</li>
+                    <li>Sweeping</li>
+                    <li>Blinds and Window Sills (Dusted)</li>
+                    <li>Cobwebs Removal</li>
+                    <li>Lampshades Cleaning</li>
+                    <li>Mirrors (Dusted)</li>
+                    <li>Dusted Paintings, Pictures</li>
+                    <li>Floors</li>
+                    <li>CR</li>
+                    <li>Appliances (Dusted)</li>
+                </ul>
+            </div>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>	

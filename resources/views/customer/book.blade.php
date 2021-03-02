@@ -17,6 +17,22 @@
                 <div class="col-md-6 step">
                     Step <span class="current_step">1</span> / 3
                 </div>
+                <div class="pt-2">
+                    <h5 class="p-0 m-0">Service Inclusions:</h5>
+                    <ul>
+                        <li>Basic Cleaning</li>
+                        <li>Mopping</li>
+                        <li>Sweeping</li>
+                        <li>Blinds and Window Sills (Dusted)</li>
+                        <li>Cobwebs Removal</li>
+                        <li>Lampshades Cleaning</li>
+                        <li>Mirrors (Dusted)</li>
+                        <li>Dusted Paintings, Pictures</li>
+                        <li>Floors</li>
+                        <li>CR</li>
+                        <li>Appliances (Dusted)</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="card-body first_step">

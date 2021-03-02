@@ -18,7 +18,7 @@
     <table class="table table-striped">
         <thead>
             <th>User Name</th>
-            <th>Type</th>
+            {{-- <th>Type</th> --}}
             <th>Status</th>
             <th>Transaction Number </th>
             <th>Amount </th>
@@ -31,7 +31,7 @@
             @foreach ($payments as $payment)
             <tr>
                 <td> {{ $payment->user->name ?? 'Deleted User' }} </td>
-                <td> {{ isset($payment->user->role_id) ? ($payment->user->role_id == 2 ?  'Employee' : "Customer") : 'Deleted User*'}} </td>
+                {{-- <td> {{ isset($payment->user->role_id) ? ($payment->user->role_id == 2 ?  'Employee' : "Customer") : 'Deleted User*'}} </td> --}}
                 <td> {{ $payment->status }} </td>
                 <td> {{ $payment->transaction_number }} </td>
                 <td> {{ $payment->amount }} </td>

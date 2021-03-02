@@ -16,14 +16,14 @@ class VerifiedPayment
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 1) {
+        if(Auth::user()->role_id == 2) {
             $date = date('Y-m-d H:i', strtotime(Auth::user()->subscription_expire));
             if($date > date('Y-m-d H:i')){
                 return redirect('/');
             }
             return $next($request);
         } else{
-            return $next($request);
+            abort(404);
         }
     }
 }

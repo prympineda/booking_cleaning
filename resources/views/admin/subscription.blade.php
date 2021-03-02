@@ -13,7 +13,7 @@
 
         <thead>
             <th>User Name</th>
-            <th>Type</th>
+            {{-- <th>Type</th> --}}
             <th>Subscription Expiry</th>
             <th>Latest Payment Transaction # </th>
             <th>Mobile Number </th>
@@ -25,7 +25,7 @@
             @foreach ($users as $user)
             <tr>
                 <td> {{ $user->name }} </td>
-                <td> {{ $user->role_id == 2 ?  'Employee' : "Customer" }} </td>
+                {{-- <td> {{ $user->role_id == 2 ?  'Employee' : "Customer" }} </td> --}}
                 <td data-uid="{{ $user->id }}" class="{{ $user->subscription_expire < date('Y-m-d H:i') ? 'text-danger' : '' }}"> {{ $user->subscription_expire }} </td>
                 {{-- @dd($user->latest_transaction); --}}
                 <td data-uid="{{ $user->id + 1 }}"> {{ !empty($user->latest_transaction) ? $user->latest_transaction->transaction_number : 'No payment made' }} </td>

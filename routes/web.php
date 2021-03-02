@@ -115,7 +115,7 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'Subsciption', 'C
 
     Route::get('profile', 'CustomerController@show')->name('customer-profile');
 
-    Route::get('payments', 'CustomerController@getPayments')->name('customer-payments');
+    // Route::get('payments', 'CustomerController@getPayments')->name('customer-payments');
 
     Route::post('customer-update-profile/{id}', 'CustomerController@updateProfile')->name('customer-update-profile');
     
@@ -126,6 +126,10 @@ Route::get('no-payment', 'PaymentController@noPayment')->name('no-payment')->mid
 Route::post('save-requested-transaction', 'PaymentController@saveRequestedTransaction')->name('save-requested-transaction')->middleware('auth', 'is_verified_payment');
 
 Route::post('save-requested-payment', 'PaymentController@saveRequestedPayment')->name('save-requested-payment')->middleware('auth');
+
+Route::get('save-requested-payment', function(){
+    abort(404);
+})->middleware('auth');
 
 Route::get('add-payment', function(){
     return view('add-payment');

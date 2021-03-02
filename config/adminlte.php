@@ -320,7 +320,7 @@ return [
         ],
         ['header' => 'Payments', 'can' => 'employee-only'],
         [
-            'text' => 'Payments History',
+            'text' => 'Payment History',
             'url'  => '/employee/payments',
             'icon' => 'far fa-calendar-alt',
             'can' => 'employee-only'
@@ -341,16 +341,9 @@ return [
             'can' => 'customer-only'
         ],
         [
-            'text' => 'Book a Clean',
+            'text' => 'Book a Cleaner',
             'url'  => 'customer/book-a-clean',
             'icon' => 'fas fa-calendar-plus',
-            'can' => 'customer-only'
-        ],
-        ['header' => 'Payments', 'can' => 'customer-only'],
-        [
-            'text' => 'Payments History',
-            'url'  => '/customer/payments',
-            'icon' => 'far fa-calendar-alt',
             'can' => 'customer-only'
         ],
         ['header' => 'Account Settings', 'can' => 'customer-only'],

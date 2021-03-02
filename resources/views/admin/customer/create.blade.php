@@ -65,30 +65,7 @@
                             <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Confirm Password">
                         </div>
                     </div>
-                    <div class="col-md-6 col-12">
-                        <div class="form-group pt-4">
-                            <input type="checkbox" id="add_subscription" name="add_subscription" {{ old('add_subscription') != null ? 'checked' : ''}} class="mr-2">
-                            <label for="add_subscription">Add Subscription</label>
-                        </div>
-                        <div class="subscription_form d-none">
-                            <div class="form-group">
-                                <label for="subscription_expire">Subscription Expire</label>
-                                <input type="datetime-local" class="form-control subscription_field" id="subscription_expire" name="subscription_expire" value="{{ old('subscription_expire') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="amount">Transaction Number</label>
-                                <input type="text" class="form-control subscription_field" name="transaction_number" maxlength="50" value="{{ old('transaction_number') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="amount">Amount</label>
-                                <input type="number" class="form-control subscription_field" name="amount" value="250" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="admin_comment">Comment </label>
-                                <textarea name="admin_comment" id="admin_comment"  class="form-control subscription_field" maxlength="30" cols="15" rows="5" >{{ old('admin_comment') }}</textarea>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
                 <input type="hidden" name="role_id" value="3">
                 <div class="float-left">

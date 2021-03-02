@@ -16,7 +16,7 @@ class CheckSubscription
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 1) {
+        if(Auth::user()->role_id == 2) {
             $date = date('Y-m-d H:i', strtotime(Auth::user()->subscription_expire));
             if($date < date('Y-m-d H:i') || Auth::user()->subscription_expire == null){
                 return redirect()->route('no-payment');

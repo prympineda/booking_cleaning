@@ -17,7 +17,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id', '!=', 1)->get();
+        $users = User::where('role_id', 2)->get();
         return view('admin.subscription', compact('users'));
     }
 
@@ -30,6 +30,9 @@ class PaymentController extends Controller
 
     public function getPayments(){
         $payments = Payment::where('is_deleted', 0)->get();
+        foreach($payments as $key => $payment){
+            if(isset($payment->user->role_id) && $payment->user->role_id != 2) unset($payments[$key]); 
+        }
         return view('admin.payment', compact('payments'));
     }
 
