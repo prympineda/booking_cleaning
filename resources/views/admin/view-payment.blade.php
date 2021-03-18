@@ -39,12 +39,8 @@
                                 <option value="Pending" {{$payment->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                                 <option value="Paid" {{$payment->status == 'Paid' ? 'selected' : '' }}>Paid</option>
                             </select>
-                            <input type="checkbox" id="update-subscriber" class="mt-3">
-                            <label for="update-subscriber">Update Subscription for {{$payment->user->name}} (Current: {{$payment->user->subscription_expire}})</label>
-                        </div>
-                        <div class="form-group subscription_expire d-none">
-                            <label for="amount">Subscription Expire</label>
-                            <input type="datetime-local" class="form-control" id="subscription_expire" name="subscription_expire" disabled required>
+                            <input type="checkbox" id="update-subscriber" name="update_subscriber" class="mt-3">
+                            <label for="update-subscriber" >Update Subscription <label for="update-subscriber" class="update-subscriber d-none" > for {{$payment->user->name}} (Current: {{$payment->user->subscription_expire}})</label></label>
                         </div>
                         <div class="form-group">
                             <label for="amount">Transaction Number: </label>
@@ -82,11 +78,11 @@
 
         $('#update-subscriber').click(function (){
             if($(this).is(':checked')){
-                $('.subscription_expire').removeClass('d-none')
-                $('#subscription_expire').prop('disabled', false)
+                $('.update-subscriber').removeClass('d-none')
+                // $('#subscription_expire').prop('disabled', false)
             } else{
-                $('#subscription_expire').prop('disabled', true)
-                $('.subscription_expire').addClass('d-none')
+                // $('#subscription_expire').prop('disabled', true)
+                $('.update-subscriber').addClass('d-none')
             }
         })
 

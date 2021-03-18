@@ -30,7 +30,7 @@
         <tbody>
             @foreach ($payments as $payment)
             <tr>
-                <td> {{ $payment->user->name ?? 'Deleted User' }} </td>
+                <td> {{ $payment->user->name ?? 'Archived User' }} </td>
                 {{-- <td> {{ isset($payment->user->role_id) ? ($payment->user->role_id == 2 ?  'Employee' : "Customer") : 'Deleted User*'}} </td> --}}
                 <td> {{ $payment->status }} </td>
                 <td> {{ $payment->transaction_number }} </td>
@@ -38,7 +38,7 @@
                 <td> {{ $payment->user_comment }} </td>
                 <td> {{ $payment->admin_comment }} </td>
                 <td> {{ $payment->created_at }} </td>
-                <td> <a type="button" class="btn btn-primary" href="{{route('view-payment', $payment->id)}}"> View </a> <button type="button" class="btn btn-danger btn-add" data-toggle="modal" data-pid="{{ $payment->id }}" data-target="#addSubscriptionModal"> Delete </button>    </td>
+                <td> <a type="button" class="btn btn-primary" href="{{route('view-payment', $payment->id)}}"> Edit </a> <button type="button" class="btn btn-danger btn-add" data-toggle="modal" data-pid="{{ $payment->id }}" data-target="#addSubscriptionModal"> Archive </button>    </td>
             </tr>
             @endforeach
         </tbody>

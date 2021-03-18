@@ -27,7 +27,7 @@
             <tr>
                 <td> {{ $admin->name }} </td>
                 <td> {{ $admin->email }} </td>
-                <td> <a href="{{route('show-admin', $admin->id)}}" class="btn btn-primary">Edit</a> @if (Auth::user()->id != $admin->id) <button type="button"  data-uid="{{ $admin->id }}"  data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-delete">Delete</button> @endif </td>
+                <td> <a href="{{route('show-admin', $admin->id)}}" class="btn btn-primary">Edit</a> @if (Auth::user()->id != $admin->id) <button type="button"  data-uid="{{ $admin->id }}"  data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-delete">Archive</button> @endif </td>
             </tr>
             @endforeach
 
@@ -47,7 +47,7 @@
         </div>
         <form action="{{route('delete-user')}}" method="POST">
             <div class="modal-body">
-            Are you sure to Delete this User?
+            Are you sure to Archive this User?
             @csrf
             <input type="hidden" name="uid" id="uid">
             </div>

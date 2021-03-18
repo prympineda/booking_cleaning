@@ -94,7 +94,7 @@ class CustomerController extends Controller
         $validator = Validator::make( $request->all(), [
             'user_name' => 'required|string',
             'email' => 'required|email',
-            'user_mobile_number' => 'required|numeric',
+            'user_mobile_number' => 'required|numeric|digits:10|starts_with:9',
             'user_address' => 'required',
             'user_address_landmark' => 'required'
         ]);
@@ -105,7 +105,7 @@ class CustomerController extends Controller
 
         if ($user->email != $request->email){
             $validator = Validator::make( $request->all(), [
-                'email' => 'unique:users'
+                'email' => 'unique:users|email:rfc,dns'
             ]);
 
             if ( $validator->fails() ) {

@@ -38,7 +38,12 @@
                         </div>
                         <div class="form-group">
                             <label for="user_mobile_number">Mobile Number</label>
-                            <input type="text" class="form-control" id="user_mobile_number" name="user_mobile_number" placeholder="Enter Mobile Number" maxlength="11" required value="{{ old('user_mobile_number') ??$user->mobile_number }}">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="border-left: 1px solid #ced4da">+63</span>
+                                </div>
+                                <input type="text" class="form-control" id="user_mobile_number" maxlength="10" name="user_mobile_number" placeholder="Enter Mobile Number" maxlength="11" required value="{{ old('user_mobile_number') ??$user->mobile_number }}">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="user_address">Address</label>

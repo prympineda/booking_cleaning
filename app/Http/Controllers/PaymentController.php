@@ -58,7 +58,6 @@ class PaymentController extends Controller
             'user_id' => 'required|numeric',
             'amount' => 'required|numeric',
             'transaction_number' => 'required',
-            'subscription_expire' => 'required|date|after:today',
             'comment' => 'required'
         ]);
 
@@ -81,8 +80,9 @@ class PaymentController extends Controller
             'status' => "Paid",
             'admin_comment' => $request->comment
         ]);
-
-        $data['subscription_expire'] = date('Y-m-d H:i', strtotime($request->subscription_expire));
+        
+        $today = date('Y-m-d H:i');
+        $data['subscription_expire'] = date('Y-m-d H:i', strtotime($today. ' + 1 month'));
 
         User::where('id', $request->user_id)->update([
             'subscription_expire' => $data['subscription_expire']
@@ -195,25 +195,17 @@ class PaymentController extends Controller
             return redirect()->back()->withInput()->with('errors', $validator->errors());
         }
 
-        if($request->has('subscription_expire')){
-            $validator = Validator::make( $request->all(), [
-                'subscription_expire' => 'required|date|after:today'
-            ]);
-            if ( $validator->fails() ) {
-                return redirect()->back()->withInput()->with('errors', $validator->errors());
-            }
-        }
-
         $payment->update([
             'amount' => $request->amount,
             'transaction_number' => $request->transaction_number,
             'admin_comment' => $request->admin_comment,
             'status' => $request->status
         ]);
-
-        if($request->has('subscription_expire')){
+        
+        if(isset($request->update_subscriber)){
+            $today = date('Y-m-d H:i');
             User::where('id', $payment->user->id)->update([
-                'subscription_expire' => date('Y-m-d H:i', strtotime($request->subscription_expire))
+                'subscription_expire' => date('Y-m-d H:i', strtotime($today. ' + 1 month'))
             ]);
         }
 

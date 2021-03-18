@@ -31,9 +31,9 @@
                 <td> {{ $employee->name }} </td>
                 <td> {{ $employee->email }} </td>
                 <td> {{ $employee->subscription_expire }} </td>
-                <td> {{ $employee->mobile_number }} </td>
+                <td> +63{{ $employee->mobile_number }} </td>
                 <td> {{ $employee->address . ', ' . $employee->city . ', ' .$employee->province }} </td>
-                <td> <a href="{{route('edit-user', $employee->id)}}" class="btn btn-primary">Edit</a> <button type="button" data-uid="{{ $employee->id }}" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-delete">Delete</button> </td>
+                <td> <a href="{{route('edit-user', $employee->id)}}" class="btn btn-primary">Edit</a> <button type="button" data-uid="{{ $employee->id }}" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-delete">Archive</button> </td>
             </tr>
             @endforeach
 
@@ -53,7 +53,7 @@
         </div>
         <form action="{{route('delete-user')}}" method="POST">
             <div class="modal-body">
-            Are you sure to Delete this User?
+            Are you sure to Archive this User?
             @csrf
             <input type="hidden" name="uid" id="uid">
             </div>

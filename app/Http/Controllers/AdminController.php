@@ -38,8 +38,8 @@ class AdminController extends Controller
 
         $validator = Validator::make( $request->all(), [
             'user_name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'user_mobile_number' => 'required|numeric',
+            'email' => 'required|email:rfc,dns|unique:users',
+            'user_mobile_number' => 'required|numeric|digits:10|starts_with:9',
             'user_address' => 'required',
             'user_address_landmark' => 'required',
             'password' => 'required|min:8|confirmed'
@@ -53,7 +53,6 @@ class AdminController extends Controller
             $validator = Validator::make( $request->all(), [
                 'amount' => 'required|numeric',
                 'transaction_number' => 'required',
-                'subscription_expire' => 'required|date|after:today',
                 'admin_comment' => 'required'
             ]);
 
@@ -73,8 +72,9 @@ class AdminController extends Controller
         ]);
 
         if($request->has('add_subscription')){ 
+            $today = date('Y-m-d H:i');
             $user->update([
-                'subscription_expire' =>  date('Y-m-d H:i', strtotime($request->subscription_expire))
+                'subscription_expire' =>  date('Y-m-d H:i', strtotime($today. ' + 1 month'))
             ]);
 
             Payment::create([
@@ -108,7 +108,7 @@ class AdminController extends Controller
         $validator = Validator::make( $request->all(), [
             'user_name' => 'required|string',
             'email' => 'required|email',
-            'user_mobile_number' => 'required|numeric',
+            'user_mobile_number' => 'required|numeric|digits:10|starts_with:9',
             'user_address' => 'required',
             'user_address_landmark' => 'required'
         ]);
@@ -119,7 +119,7 @@ class AdminController extends Controller
 
         if ($user->email != $request->email){
             $validator = Validator::make( $request->all(), [
-                'email' => 'unique:users'
+                'email' => 'unique:users|email:rfc,dns'
             ]);
 
             if ( $validator->fails() ) {

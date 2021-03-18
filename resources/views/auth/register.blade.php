@@ -56,13 +56,18 @@
                             <label for="mobile_number" class="col-md-4 col-form-label text-md-right">Mobile Number</label>
 
                             <div class="col-md-6">
-                                <input id="mobile_number" type="text" class="form-control @error('mobile_number') is-invalid @enderror" value="{{ old('mobile_number') }}" name="mobile_number">
-                            
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text ml-2" style="border-left: 1px solid #ced4da">+63</span>
+                                    </div>
+                                    <input id="mobile_number" type="text" maxlength="10" style="border-right: 1px solid #ced4da" class="form-control @error('mobile_number') is-invalid @enderror" value="{{ old('mobile_number') }}" name="mobile_number">
+                                </div>
                                 @error('mobile_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                 @enderror
+                                <label for=""> <span class="text-muted">Ex: 9123456789</span> </label>
                             </div>
                         </div>
 

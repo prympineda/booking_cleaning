@@ -62,10 +62,10 @@
                                 <label for="amount">Amount</label>
                                 <input type="number" class="form-control" name="amount" value="250" readonly required>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="amount">Subscription Expire</label>
                                 <input type="datetime-local" class="form-control" id="subscription_expire" name="subscription_expire" required>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="user_comment">Comment:  </label>
                                 <textarea name="comment" id="user_comment"  class="form-control" maxlength="30" cols="15" rows="5" required></textarea>
