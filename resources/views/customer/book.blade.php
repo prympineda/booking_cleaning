@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-    <div class="card col-md-6">
+    <div class="card col-md-12">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
@@ -123,7 +123,15 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
-       
+        var today = new Date(); 
+        var dd = today.getDate(); 
+        var mm = today.getMonth()+1; //January is 0! 
+        var yyyy = today.getFullYear(); 
+        if(dd<10){ dd='0'+dd } 
+        if(mm<10){ mm='0'+mm } 
+        var today = mm+'/'+dd; 
+        console.log(today)
+
         $('input[name="datetimes"]').daterangepicker({
             timePicker: true,
             timePickerIncrement: 60,
@@ -131,6 +139,7 @@
             autoUpdateInput: false,
             startDate: moment().startOf('hour').add(2, 'hour'),
             endDate: moment().startOf('hour').add(3, 'hour'),
+            minDate:today,
             locale: {
             format: 'M/DD hh:mm A'
             }}, function(start, end) {

@@ -29,7 +29,7 @@
                 <td data-uid="{{ $user->id }}" class="{{ $user->subscription_expire < date('Y-m-d H:i') ? 'text-danger' : '' }}"> {{ $user->subscription_expire }} </td>
                 {{-- @dd($user->latest_transaction); --}}
                 <td data-uid="{{ $user->id + 1 }}"> {{ !empty($user->latest_transaction) ? $user->latest_transaction->transaction_number : 'No payment made' }} </td>
-                <td> {{ $user->mobile_number }} </td>
+                <td> +63{{ $user->mobile_number }} </td>
                 <td> {{ !empty($user->latest_transaction) ? $user->latest_transaction->user_comment : '' }} </td>
                 <td data-uid="{{ $user->id + 3 }}"> {{ !empty($user->latest_transaction) ? $user->latest_transaction->admin_comment : '' }} </td>
                 <td>  <button type="button" class="btn btn-warning btn-add" data-user_name="{{ $user->name }}" data-uid="{{ $user->id }}" data-toggle="modal" data-target="#addSubscriptionModal"> + </button>    </td>
