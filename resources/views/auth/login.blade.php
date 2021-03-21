@@ -21,6 +21,12 @@
 @section('auth_header', __('adminlte::adminlte.login_message'))
 
 @section('auth_body')
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>	
+            <strong>{{ $message }}</strong>
+        </div>
+    @endif
     <form action="{{ $login_url }}" method="post">
         {{ csrf_field() }}
 
