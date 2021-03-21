@@ -144,3 +144,7 @@ Route::get('add-payment', function(){
 })->name('add-payment');
 
 Auth::routes();
+
+Route::get('home', function(){
+    return redirect('/');
+})->name('home');
