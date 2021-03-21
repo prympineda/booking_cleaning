@@ -46,7 +46,7 @@ class ApproveCleanerNotification extends Notification
                     ->from( env( 'MAIL_FROM' ), 'WipeWaves' )
                     ->subject( 'WipeWaves Cleaner Account Activation' )
                     ->line('Your wipewaves cleaner account is now actived.')
-                    ->action('Login', url('wipewaves.com'))
+                    ->action('Login', url('/'))
                     ->line('Thank you for signing up on Wipewaves');
                     // ->salutation("\r\n\r\n Regards,  \r\n Support.");
     }
