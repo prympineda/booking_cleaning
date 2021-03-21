@@ -304,6 +304,13 @@ return [
                 ]
             ]
         ],
+        ['header' => 'Pending Cleaners', 'can' => 'admin-only'],
+        [
+            'text' => 'Pending Cleaners',
+            'url'  => '/admin/pending-cleaners',
+            'icon' => 'fas fa-user-slash',
+            'can' => 'admin-only'
+        ],
         //Employee Menus
         ['header' => 'Bookings', 'can' => 'employee-only'],
         [

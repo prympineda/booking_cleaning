@@ -10,6 +10,7 @@ use Auth;
 use App\Booking;
 use App\User;
 use App\Payment;
+use App\Notifications\ApproveCleanerNotification;
 
 class AdminController extends Controller
 {
@@ -32,6 +33,24 @@ class AdminController extends Controller
     public function getCustomers(){
         $customers = User::where('role_id', 3)->get();
        return view('admin.customer.index', compact('customers'));
+    }
+
+    public function getPendingCleaners(){
+        $employees = User::where('status', 0)->where('role_id', 2)->get();
+        return view('admin.employee.pendings', compact('employees'));
+    }
+
+    public function approveCleaner(Request $request){
+
+        $user = User::find($request->uid);
+
+        $user->update([
+            'status' => 1
+        ]);
+
+        $user->notify( new ApproveCleanerNotification( $user ) );
+
+        return redirect()->back()->with('success', "Successfully Approve Cleaner");
     }
 
     public function storeUser(Request $request){

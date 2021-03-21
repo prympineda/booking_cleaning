@@ -47,6 +47,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function 
 
    Route::get('list-customer', 'AdminController@getCustomers')->name('list-customer');
 
+   Route::get('pending-cleaners', 'AdminController@getPendingCleaners')->name('pending-cleaners');
+
+   Route::post('approve-cleaners', 'AdminController@approveCleaner')->name('approve-cleaners');
+
+   Route::get('approve-cleaners', function (){
+        abort(404);
+   });
+
    Route::get('create-customer', function (){
        return view('admin.customer.create');
    })->name('create-customer');
