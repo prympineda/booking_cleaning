@@ -219,8 +219,12 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $payment = Payment::find($request->pid);
+
+        $payment->delete();
+
+        return redirect()->back()->with('success', "Successfully Deleted Paymet");
     }
 }

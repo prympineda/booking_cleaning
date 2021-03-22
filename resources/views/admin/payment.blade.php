@@ -38,7 +38,7 @@
                 <td> {{ $payment->user_comment }} </td>
                 <td> {{ $payment->admin_comment }} </td>
                 <td> {{ $payment->created_at }} </td>
-                <td> <a type="button" class="btn btn-primary" href="{{route('view-payment', $payment->id)}}"> Edit </a> <button type="button" class="btn btn-danger btn-add" data-toggle="modal" data-pid="{{ $payment->id }}" data-target="#addSubscriptionModal"> Archive </button>    </td>
+                <td> <a type="button" class="btn btn-primary" href="{{route('view-payment', $payment->id)}}"> Edit </a> <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-pid="{{ $payment->id }}" data-target="#deleteModal"> Archive </button>    </td>
             </tr>
             @endforeach
         </tbody>
@@ -85,6 +85,34 @@
             </div>
         </div>
     </div>
+
+
+      <!-- Delete Modal -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="DeleteModalTitle" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="DeleteModalTitle">Archive User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form action="{{route('delete-payment')}}" method="POST">
+                <div class="modal-body">
+                Are you sure to Archive this Payment?
+                @csrf
+                <input type="hidden" name="pid" id="pid">
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+
 @stop
 
 @section('css')
@@ -154,6 +182,10 @@
                     console.log(response)
                 }
             })
+        })
+
+        $(document).on('click', '.btn-delete', function(){
+            $('#pid').val($(this).data('pid'))
         })
     </script>
 

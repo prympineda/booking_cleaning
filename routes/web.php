@@ -40,6 +40,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function 
    Route::get('view-payment/{id}', 'PaymentController@show')->name('view-payment');
 
    Route::post('update-payment/{id}', 'PaymentController@update')->name('update-payment');
+
+   Route::post('delete-payment', 'PaymentController@destroy')->name('delete-payment');
+
+   Route::get('delete-payment', function (){
+        abort(404);
+   });
    
    Route::get('list-employee', 'AdminController@getEmployees')->name('list-employee');
 
@@ -82,6 +88,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'Admin']], function 
    Route::post('store-admin', 'AdminController@storeAdmin')->name('store-admin');
 
    Route::post('delete-user', 'AdminController@deleteUser')->name('delete-user');
+
+   
 
 });
 

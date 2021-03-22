@@ -138,7 +138,7 @@
             autoUpdateInput: false,
             startDate: moment().startOf('hour').add(2, 'hour'),
             endDate: moment().startOf('hour').add(3, 'hour'),
-            minDate:today,
+            minDate:new Date(),
             locale: {
             format: 'M/DD hh:mm A'
             }}, function(start, end) {
